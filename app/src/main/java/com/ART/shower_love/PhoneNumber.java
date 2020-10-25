@@ -99,7 +99,7 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
 
             }
         });
-        Spinner spin =  findViewById(R.id.spinner1);
+        Spinner spin =  findViewById(R.id.spinnercondition);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, users);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);
