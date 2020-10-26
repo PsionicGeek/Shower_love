@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.ART.shower_love.ui.donatereceive.DonatePage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -95,7 +96,7 @@ public class OTPverifyActivity extends AppCompatActivity {
     }
 
     private void senduserHome(){
-        Intent HomeiNtent = new Intent(OTPverifyActivity.this,MainActivity.class);
+        Intent HomeiNtent = new Intent(OTPverifyActivity.this, DonatePage.class);
         HomeiNtent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         HomeiNtent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(HomeiNtent);

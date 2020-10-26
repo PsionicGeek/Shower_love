@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ART.shower_love.ui.donatereceive.DonatePage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -152,7 +153,7 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
     }
 
     private void sendUserhome(){
-        Intent homeIntent = new Intent(PhoneNumber.this,MainActivity.class);
+        Intent homeIntent = new Intent(PhoneNumber.this, DonatePage.class);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(homeIntent);
