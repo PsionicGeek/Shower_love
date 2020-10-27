@@ -31,6 +31,7 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
     public boolean isphoneverified = false;
     String[] users = { "Electronics", "Food","Cloths","Books","furniture" };
     String[] gender = {"Male" , "Female", "Other"};
+    String itemChatogory , UserGender;
 
 
     private EditText mCountrycode;
@@ -83,14 +84,14 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
                 }
             }
         });
-        Spinner gen = findViewById(R.id.spinner2);
+        final Spinner gen = findViewById(R.id.spinner2);
         ArrayAdapter<String> genderadapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,gender);
         genderadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gen.setAdapter(genderadapter);
         gen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "Selected User: "+users[position] , Toast.LENGTH_SHORT).show();
+                UserGender = gender[position];
 
 
             }
@@ -108,7 +109,7 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
         McallBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                signInWithPhoneAuthCredentials(phoneAuthCredential);
+                sendUserhome();
             }
 
 
@@ -134,28 +135,14 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
 
     }
 
-    private void signInWithPhoneAuthCredentials(PhoneAuthCredential credential){
-        mAuth.getCurrentUser().linkWithCredential(credential)
-                .addOnCompleteListener(PhoneNumber.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            sendUserhome();
-                             isphoneverified = true;
-                        }else {
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException){
-                                Toast.makeText(getApplicationContext(),"error In verifying OTP",Toast.LENGTH_LONG).show();
-                            }
-                        }
-                        mLoginProgress.setVisibility(View.VISIBLE);
-                    }
-                });
-    }
+
 
     private void sendUserhome(){
         Intent homeIntent = new Intent(PhoneNumber.this, DonatePage.class);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        homeIntent.putExtra("chatogary",itemChatogory);
+        homeIntent.putExtra("Gender",UserGender);
         startActivity(homeIntent);
         finish();
     }
@@ -172,7 +159,7 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
-        Toast.makeText(getApplicationContext(), "Selected User: "+users[i] , Toast.LENGTH_SHORT).show();
+        itemChatogory = users[i];
 
     }
 
