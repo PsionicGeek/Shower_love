@@ -31,10 +31,11 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
     public boolean isphoneverified = false;
     String[] users = { "Electronics", "Food","Cloths","Books","furniture" };
     String[] gender = {"Male" , "Female", "Other"};
-    String itemChatogory , UserGender;
+    String itemChatogory , UserGender , PostalCode , useraddress;
+    String complete_phone_number;
 
 
-    private EditText mCountrycode;
+    private EditText mCountrycode , EnteredPostalCode , EnteredAdress;
     private EditText mPhoneNumber;
 
     private Button mGeneratbtn;
@@ -56,6 +57,9 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
         mPhoneNumber = findViewById(R.id.Mobile_Number_et);
         mGeneratbtn = findViewById(R.id.button_generate_otp);
         mLoginProgress = findViewById(R.id.generate_progress_bar);
+        EnteredPostalCode =findViewById( R.id.donar_postalcode);
+        EnteredAdress = findViewById(R.id.donator_address);
+
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
@@ -66,10 +70,12 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
             public void onClick(View view) {
                 String country_code = mCountrycode.getText().toString();
                 String phone_number = mPhoneNumber.getText().toString();
+                PostalCode = EnteredPostalCode.getText().toString();
+                useraddress = EnteredAdress.getText().toString();
 
-                String complete_phone_number = "+"+country_code + phone_number;
+               complete_phone_number = "+"+country_code + phone_number;
 
-                if (country_code.isEmpty() || phone_number.isEmpty() ){
+                if (country_code.isEmpty() || phone_number.isEmpty()|| PostalCode.isEmpty()||useraddress.isEmpty() ){
                     Toast.makeText(getApplicationContext(),"Please Fill",Toast.LENGTH_LONG).show();
                 }else {
                     mLoginProgress.setVisibility(View.VISIBLE);
@@ -126,6 +132,11 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
 
                 Intent otpIntent = new Intent(PhoneNumber.this,OTPverifyActivity.class);
                 otpIntent.putExtra("AuthCredentials",s);
+                otpIntent.putExtra("Gender",UserGender);
+                otpIntent.putExtra("chatogary",itemChatogory);
+                otpIntent.putExtra("postalcode",PostalCode);
+                otpIntent.putExtra("address",useraddress);
+                otpIntent.putExtra("phone",complete_phone_number);
                 startActivity(otpIntent);
 
             }
@@ -143,6 +154,10 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         homeIntent.putExtra("chatogary",itemChatogory);
         homeIntent.putExtra("Gender",UserGender);
+        homeIntent.putExtra("postalcode",PostalCode);
+        homeIntent.putExtra("adress",useraddress);
+        homeIntent.putExtra("phone",complete_phone_number);
+
         startActivity(homeIntent);
         finish();
     }
