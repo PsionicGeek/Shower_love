@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ART.shower_love.R;
@@ -26,16 +27,24 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class DonatePage extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Uri FilePathUri;
     FirebaseAuth fAuth;
+    FirebaseFirestore fstore;
+    String user_id;
     StorageReference storageReference;
     DatabaseReference databaseReference;
     int Image_Request_Code = 7;
@@ -47,6 +56,9 @@ public class DonatePage extends AppCompatActivity implements AdapterView.OnItemS
     String [] recycle = {"Yes","No",};
     String [] use = {"Can use directly","Need a recycle"};
     String ItemCondition , ItemRecycle, ItemUse;
+    String itemChatogory , UserGender , PostalCode , useraddress;
+    String complete_phone_number;
+    String name,email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +72,27 @@ public class DonatePage extends AppCompatActivity implements AdapterView.OnItemS
         Spinner cond = findViewById(R.id.spinnercondition);
         Spinner rcyc = findViewById(R.id.spinnerrecycle);
         Spinner usecondition = findViewById(R.id.spinneruse);
+        fAuth = FirebaseAuth.getInstance();
+        fstore = FirebaseFirestore.getInstance();
+        user_id =  Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
+        final DocumentReference documentReference = fstore.collection("UserDetail").document(user_id);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(value!=null){
+                     name= value.getString("UserName");
+                    email= value.getString("Email");
+                }
+            }
+        });
         progressDialog = new ProgressDialog(DonatePage.this);
         storageReference = FirebaseStorage.getInstance().getReference("Images");
-        databaseReference = FirebaseDatabase.getInstance().getReference("Images");
+        databaseReference = FirebaseDatabase.getInstance().getReference("ItemsDonation");
+        UserGender= getIntent().getStringExtra("Gender");
+        itemChatogory = getIntent().getStringExtra("chatogary");
+        PostalCode = getIntent().getStringExtra("postalcode");
+        useraddress = getIntent().getStringExtra("address");
+        complete_phone_number = getIntent().getStringExtra("phone");
         brwsimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -167,7 +197,7 @@ public class DonatePage extends AppCompatActivity implements AdapterView.OnItemS
                             progressDialog.dismiss();
                             Toast.makeText(getApplicationContext(), "Image Uploaded Successfully ", Toast.LENGTH_LONG).show();
                             @SuppressWarnings("VisibleForTests")
-                            uploadinfo imageUploadInfo = new uploadinfo(TempImageName, taskSnapshot.getUploadSessionUri().toString(),ItemCondition,ItemRecycle,ItemUse);
+                            uploadinfo imageUploadInfo = new uploadinfo(TempImageName, taskSnapshot.getUploadSessionUri().toString(),ItemCondition,ItemRecycle,ItemUse,itemChatogory,UserGender,PostalCode,useraddress,complete_phone_number,name,email);
                             String ImageUploadId = databaseReference.push().getKey();
                             databaseReference.child(ImageUploadId).setValue(imageUploadInfo);
                         }

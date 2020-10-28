@@ -155,7 +155,7 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
         homeIntent.putExtra("chatogary",itemChatogory);
         homeIntent.putExtra("Gender",UserGender);
         homeIntent.putExtra("postalcode",PostalCode);
-        homeIntent.putExtra("adress",useraddress);
+        homeIntent.putExtra("address",useraddress);
         homeIntent.putExtra("phone",complete_phone_number);
 
         startActivity(homeIntent);

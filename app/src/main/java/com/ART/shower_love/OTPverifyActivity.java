@@ -106,6 +106,9 @@ public class OTPverifyActivity extends AppCompatActivity {
         HomeiNtent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         HomeiNtent.putExtra("chatogary",itemChatogory);
         HomeiNtent.putExtra("Gender",UserGender);
+        HomeiNtent.putExtra("postalcode", getIntent().getStringExtra("postalcode"));
+        HomeiNtent.putExtra("address", getIntent().getStringExtra("address"));
+        HomeiNtent.putExtra("phone", getIntent().getStringExtra("phone"));
         startActivity(HomeiNtent);
         finish();
     }
