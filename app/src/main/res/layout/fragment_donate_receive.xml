@@ -9,17 +9,17 @@
 
 
     <Button
-        android:id="@+id/donate_button"
+        android:id="@+id/donate_item"
         android:layout_width="328dp"
         android:layout_height="60dp"
         android:layout_marginBottom="4dp"
         android:background="@drawable/menu_button"
-        android:text="Donate Blood"
+        android:text="Donate Item"
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/donate_item"
+        app:layout_constraintTop_toBottomOf="@+id/donate_blood"
         app:layout_constraintVertical_bias="0.13999999" />
 
     <View
@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/donate_button" />
+        app:layout_constraintTop_toBottomOf="@+id/donate_item" />
 
     <Button
         android:id="@+id/receive_button"
@@ -44,15 +44,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/donate_button"
+        app:layout_constraintTop_toBottomOf="@+id/donate_item"
         app:layout_constraintVertical_bias="0.43" />
 
     <Button
-        android:id="@+id/donate_item"
+        android:id="@+id/donate_blood"
         android:layout_width="325dp"
         android:layout_height="60dp"
         android:background="@drawable/menu_button"
-        android:text="Donate Item"
+        android:text="Donate Blood"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

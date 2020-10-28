@@ -27,10 +27,18 @@ public class DonateReceiveFragment extends Fragment  implements  View.OnClickLis
         donateReceiveViewModel =
                 new ViewModelProvider(this).get(DonateReceiveViewModel.class);
         View root = inflater.inflate(R.layout.fragment_donate_receive, container, false);
-        Button donate_page = root.findViewById(R.id.donate_button);
+        Button donate_itemBTN = root.findViewById(R.id.donate_item);
+        Button donate_bloodBTN = root.findViewById(R.id.donate_blood);
         Button receive_page  =root.findViewById(R.id.receive_button);
         receive_page.setOnClickListener(receive_listener);
-        donate_page.setOnClickListener(this);
+        donate_bloodBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent( getContext(),BloodPhoneNumber.class));
+
+            }
+        });
+        donate_itemBTN.setOnClickListener(this);
         donateReceiveViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
