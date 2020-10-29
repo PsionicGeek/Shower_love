@@ -126,7 +126,7 @@ public class BloodPhoneNumber extends AppCompatActivity implements AdapterView.O
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
 
-                Intent otpIntent = new Intent(com.ART.shower_love.ui.donatereceive.BloodPhoneNumber.this, OTPverifyActivity.class);
+                Intent otpIntent = new Intent(com.ART.shower_love.ui.donatereceive.BloodPhoneNumber.this, BloodOTPverifyActivity.class);
                 otpIntent.putExtra("AuthCredentials", s);
                 otpIntent.putExtra("Gender", UserGender);
                 otpIntent.putExtra("Blood Group", bloodgroup);
@@ -143,7 +143,7 @@ public class BloodPhoneNumber extends AppCompatActivity implements AdapterView.O
 
 
     private void sendUserhome() {
-        Intent homeIntent = new Intent(com.ART.shower_love.ui.donatereceive.BloodPhoneNumber.this, DonatePage.class);
+        Intent homeIntent = new Intent(com.ART.shower_love.ui.donatereceive.BloodPhoneNumber.this, BloodDonatePage.class);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         homeIntent.putExtra("Blood Group", bloodgroup);

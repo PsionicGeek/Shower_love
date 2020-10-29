@@ -32,6 +32,12 @@
         <activity android:name=".ui.donatereceive.BloodPhoneNumber">
 
         </activity>
+        <activity android:name=".ui.donatereceive.BloodDonatePage">
+
+        </activity>
+        <activity android:name=".ui.donatereceive.BloodOTPverifyActivity">
+
+        </activity>
         <activity android:name=".Splash"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
