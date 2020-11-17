@@ -49,10 +49,10 @@ public class PhoneNumber extends AppCompatActivity implements  AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phoneactivity);
 
-        mCountrycode = findViewById(R.id.blood_country_code_et);
-        mPhoneNumber = findViewById(R.id.Blood_Mobile_Number_et);
+        mCountrycode = findViewById(R.id.country_code_et);
+        mPhoneNumber = findViewById(R.id.Mobile_Number_et);
         mGeneratbtn = findViewById(R.id.button_generate_otp);
-        mLoginProgress = findViewById(R.id.blood_generate_progress_bar);
+        mLoginProgress = findViewById(R.id.generate_progress_bar);
         EnteredPostalCode =findViewById( R.id.donar_postalcode);
         EnteredAdress = findViewById(R.id.donator_address);
 
